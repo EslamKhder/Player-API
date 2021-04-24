@@ -29,14 +29,11 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableTransactionManagement
 @ComponentScan("com.spring.playerapi")
 @PropertySource({ "classpath:persistence-mysql.properties" })
-public class DemoAppConfig implements WebMvcConfigurer {
-
+public class SpringContainer implements WebMvcConfigurer {
+	
 	@Autowired
 	private Environment env;
 	
-	private Logger logger = Logger.getLogger(getClass().getName());
-	
-	// define a bean for ViewResolver
 
 	@Bean
 	public DataSource myDataSource() {
@@ -51,10 +48,6 @@ public class DemoAppConfig implements WebMvcConfigurer {
 		catch (PropertyVetoException exc) {
 			throw new RuntimeException(exc);
 		}
-		
-		// for sanity's sake, let's log url and user ... just to make sure we are reading the data
-		logger.info("jdbc.url=" + env.getProperty("jdbc.url"));
-		logger.info("jdbc.user=" + env.getProperty("jdbc.user"));
 		
 		// set database connection props
 		myDataSource.setJdbcUrl(env.getProperty("jdbc.url"));
@@ -119,14 +112,5 @@ public class DemoAppConfig implements WebMvcConfigurer {
 
 		return txManager;
 	}	
-	
+		
 }
-
-
-
-
-
-
-
-
-
