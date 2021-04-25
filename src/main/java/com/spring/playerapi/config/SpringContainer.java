@@ -43,7 +43,7 @@ public class SpringContainer implements WebMvcConfigurer {
 
 		// set the jdbc driver
 		try {
-			myDataSource.setDriverClass("com.mysql.jdbc.Driver");		
+			myDataSource.setDriverClass("com.mysql.cj.jdbc.Driver");		
 		}
 		catch (PropertyVetoException exc) {
 			throw new RuntimeException(exc);
