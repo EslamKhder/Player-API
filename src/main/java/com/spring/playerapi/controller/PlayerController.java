@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.spring.playerapi.exception.StudentException;
 import com.spring.playerapi.model.Player;
 import com.spring.playerapi.service.PlayerService;
 
@@ -40,7 +42,11 @@ public class PlayerController {
 	// http://localhost:8080/spring-crm-rest/api/players/id
 	@GetMapping("/players/{id}")
 	public Player getPlayerById(@PathVariable("id")int id) {
-		return playerService.showPlayer(id);
+		Player p = playerService.showPlayer(id);
+		if(p == null) {
+			throw new StudentException("Player Not Found id: " + id);
+		}
+		return p;
 	}
 	
 	// http://localhost:8080/spring-crm-rest/api/players
@@ -48,4 +54,5 @@ public class PlayerController {
 	public Player getPlayerById(@RequestParam int id) {
 		return playerService.showPlayer(id);
 	}*/
+	
 }
