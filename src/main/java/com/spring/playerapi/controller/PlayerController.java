@@ -3,6 +3,7 @@ package com.spring.playerapi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,6 @@ public class PlayerController {
 	
 	@Autowired
 	private PlayerService playerService;
-	
 	
 	
 	@GetMapping("/data")
@@ -71,4 +71,22 @@ public class PlayerController {
 		playerService.savePlayer(player);
 		return "Success editing";
 	}
+	
+	// http://localhost:8080/spring-crm-rest/api/players/id
+	@DeleteMapping("/players/{id}")
+	public void removePlayer(@PathVariable("id")int id) {
+		int result = playerService.deletePlayer(id);
+		System.out.println(result);
+		if(result == 0) {
+			throw new StudentException("Player Not Found id: " + id);
+		}
+			
+		
+	}
+	// http://localhost:8080/spring-crm-rest/api/players
+	/*@DeleteMapping("/players")
+	public void removePlayer(@RequestParam int id) {
+		playerService.deletePlayer(id);
+	}*/
+		
 }

@@ -11,5 +11,5 @@ public interface PlayerService {
 	
 	public Player showPlayer(int id);
 	
-	public void deletePlayer(int id);
+	public int deletePlayer(int id);
 }
