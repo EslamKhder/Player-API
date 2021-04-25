@@ -40,7 +40,6 @@ public class PlayerDaoImpl implements PlayerDAO {
 	@Override
 	public void addPlayers(Player player) {
 		Session session = sessionFactory.getCurrentSession();
-		
 		session.saveOrUpdate(player);
 	}
 
